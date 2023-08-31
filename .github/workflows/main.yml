@@ -47,6 +47,7 @@ jobs:
           ######
           CF_LOGIN_API: https://stage.app.algosec.com/api/algosaas/auth/v1/access-keys/login
           #####
+          product: Prevasio
           framework: docker
           WORK_ON_CHANGE: false
           WORKING_DIR: /docker
