@@ -15,7 +15,7 @@ def index():\n\
     return render_template('main.html')" > ./main.py
 RUN mkdir ./templates
 RUN echo "<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>\n\
-<title>Welcome to Prevasio!</title><link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>\n\
+<title>Welcome to Prevasio!!</title><link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>\n\
 <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>\n\
 <style>body{background-color:#001924;background:linear-gradient(236deg,#003f5a 0,#000 100%);font-size:24px;line-height:1.5}.icons{flex-wrap:wrap;\n\
 display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-ms-flex-wrap:wrap}\n\
