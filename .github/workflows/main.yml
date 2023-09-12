@@ -25,6 +25,9 @@ jobs:
   algosec-iac-connectivity-risk-analysis:
     name: 'Algosec Prevasio CI/CD Container Security'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     needs: login-to-amazon-ecr
     container:
       image: docker://703474237928.dkr.ecr.us-east-1.amazonaws.com/devsecops-action-prevasio:latest
