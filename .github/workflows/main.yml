@@ -1,56 +1,23 @@
-name: 'Prevasio CI/CD Container Security Test'
+name: Algosec Prevasio CI/CD Container Security Yaml Workflow
 on:
   pull_request:
     branches:
-      - 'main'
+      - main
+  workflow_dispatch:
 jobs:
-  login-to-amazon-ecr:
-    name: 'Authenticate to ECR'
+  algosec-prevasio-cicd-container-security:
+    name: Algosec Prevasio CI/CD Container Security
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-    outputs:
-      docker_username: ${{ steps.login-ecr.outputs.docker_username_703474237928_dkr_ecr_us_east_1_amazonaws_com }}
-      docker_password: ${{ steps.login-ecr.outputs.docker_password_703474237928_dkr_ecr_us_east_1_amazonaws_com }}
-  algosec-iac-connectivity-risk-analysis:
-    name: 'Algosec Prevasio CI/CD Container Security'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-    needs: login-to-amazon-ecr
-    container:
-      image: docker://703474237928.dkr.ecr.us-east-1.amazonaws.com/devsecops-action-prevasio:latest
-      credentials:
-        username: ${{ needs.login-to-amazon-ecr.outputs.docker_username }}
-        password: ${{ needs.login-to-amazon-ecr.outputs.docker_password }}
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-      - name: Connectivity Risk Analysis
-        run: iac-risk-analysis
+      - name: Algosec Prevasio CI/CD Container Security
+        uses: algosec/prevasio-cicd-container-security-action@v1.0.0
         env:
-          ALGOSEC_TENANT_ID: ${{ secrets.ALGOSEC_TENANT_ID }}
-          ALGOSEC_CLIENT_ID: ${{ secrets.ALGOSEC_CLIENT_ID }}
-          ALGOSEC_CLIENT_SECRET: ${{ secrets.ALGOSEC_CLIENT_SECRET }}
-          ######
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ######
-          CF_LOGIN_API: https://stage.app.algosec.com/api/algosaas/auth/v1/access-keys/login
-          #####
-          PRODUCT: prevasio
-          FRAMEWORK: docker
-          WORK_ON_CHANGE: false
+          CF_TENANT_ID: ${{ secrets.CF_TENANT_ID }}
+          CF_CLIENT_ID: ${{ secrets.CF_CLIENT_ID }}
+          CF_CLIENT_SECRET: ${{ secrets.CF_CLIENT_SECRET }}
           WORKING_DIR: .
-          APIGATEWAY_BASE_URL: https://stage.prevasio.io/api/ci/docker-scan
-          MIN_LEVEL_TO_BLOCK_PR: 1
+          DOCKERFILE_NAME: Dockerfile
+          MIN_LEVEL_TO_BLOCK_PR: 0
