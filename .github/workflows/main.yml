@@ -2,22 +2,25 @@ name: Algosec Prevasio CI/CD Container Security Yaml Workflow
 on:
   pull_request:
     branches:
-      - main
+    - main
   workflow_dispatch:
 jobs:
   algosec-prevasio-cicd-container-security:
     name: Algosec Prevasio CI/CD Container Security
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Algosec Prevasio CI/CD Container Security
-        uses: algosec/prevasio-cicd-container-security-action@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CF_TENANT_ID: ${{ secrets.CF_TENANT_ID }}
-          CF_CLIENT_ID: ${{ secrets.CF_CLIENT_ID }}
-          CF_CLIENT_SECRET: ${{ secrets.CF_CLIENT_SECRET }}
-          WORKING_DIR: .
-          DOCKERFILE_NAME: Dockerfile
-          MIN_LEVEL_TO_BLOCK_PR: 0
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Algosec Prevasio CI/CD Container Security
+      uses: algosec/prevasio-cicd-container-security-action@v1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ALGOSEC_TENANT_ID: ${{ secrets.ALGOSEC_TENANT_ID }}
+        ALGOSEC_CLIENT_ID: ${{ secrets.ALGOSEC_CLIENT_ID }}
+        ALGOSEC_CLIENT_SECRET: ${{ secrets.ALGOSEC_CLIENT_SECRET }}
+        WORKING_DIR: .
+        DOCKERFILE_NAME: Dockerfile
+        MIN_LEVEL_TO_BLOCK_PR: 0
