@@ -25,6 +25,9 @@ jobs:
   algosec-iac-connectivity-risk-analysis:
     name: 'Algosec Prevasio CI/CD Container Security'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     needs: login-to-amazon-ecr
     container:
       image: docker://703474237928.dkr.ecr.us-east-1.amazonaws.com/devsecops-action-prevasio:latest
@@ -37,17 +40,17 @@ jobs:
       - name: Connectivity Risk Analysis
         run: iac-risk-analysis
         env:
-          CF_TENANT_ID: ${{ secrets.CF_TENANT_ID }}
-          CF_CLIENT_ID: ${{ secrets.CF_CLIENT_ID }}
-          CF_CLIENT_SECRET: ${{ secrets.CF_CLIENT_SECRET }}
+          ALGOSEC_TENANT_ID: ${{ secrets.ALGOSEC_TENANT_ID }}
+          ALGOSEC_CLIENT_ID: ${{ secrets.ALGOSEC_CLIENT_ID }}
+          ALGOSEC_CLIENT_SECRET: ${{ secrets.ALGOSEC_CLIENT_SECRET }}
           ######
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_WORKSPACE: ${{ secrets.GITHUB_WORKSPACE }}
-          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
           ######
           CF_LOGIN_API: https://stage.app.algosec.com/api/algosaas/auth/v1/access-keys/login
           #####
-          framework: docker
+          PRODUCT: prevasio
+          FRAMEWORK: docker
           WORK_ON_CHANGE: false
           WORKING_DIR: .
-          APIGATEWAY_BASE_URL: https://oka9hih9wh.execute-api.us-east-1.amazonaws.com/stage/ci/docker-scan
+          APIGATEWAY_BASE_URL: https://stage.prevasio.io/api/ci/docker-scan
+          MIN_LEVEL_TO_BLOCK_PR: 0
