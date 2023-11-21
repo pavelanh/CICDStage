@@ -8,7 +8,7 @@ RUN echo "from flask import Flask, render_template\n\
 import sys\n\
 import urllib.request\n\
 app = Flask(__name__)\n\
-print('Regression test for 🇵​​​​​🇷​​​​​🇪​​​​​🇻​​​​​🇦​​​​​🇸​​​​​🇮​​​​​🇴', file=sys.stderr)\n\
+print('Regression test for 🇵🇷🇪🇻🇦🇸🇮🇴', file=sys.stderr)\n\
 @app.route('/')\n\
 def index():\n\
     urllib.request.urlretrieve('http://www.naenara.com.kp', 'bad_file.bin')\n\
