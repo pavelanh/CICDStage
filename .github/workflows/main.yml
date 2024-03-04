@@ -52,6 +52,7 @@ jobs:
           PRODUCT: prevasio
           FRAMEWORK: docker
           WORK_ON_CHANGE: false
+          CF_REGION: stage
           WORKING_DIR: /docker
           APIGATEWAY_BASE_URL: https://stage.app.algosec.com/prevasio/api/ci/docker-scan
           MIN_LEVEL_TO_BLOCK_PR: 0
