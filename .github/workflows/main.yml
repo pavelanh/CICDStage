@@ -55,4 +55,4 @@ jobs:
           WORKING_DIR: .
           APIGATEWAY_BASE_URL: https://stage.app.algosec.com/prevasio/api/ci/docker-scan
           MIN_LEVEL_TO_BLOCK_PR: 1
-          CF_REGION: stage
+          
