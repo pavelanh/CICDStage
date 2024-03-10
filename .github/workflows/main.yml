@@ -47,11 +47,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ######
           CF_LOGIN_API: https://stage.app.algosec.com/api/algosaas/auth/v1/access-keys/login
-          CF_REGION: stage
           #####
           PRODUCT: prevasio
           FRAMEWORK: docker
           WORK_ON_CHANGE: false
           WORKING_DIR: /docker
+          DOCKERFILE_NAME: Dockerfile
           APIGATEWAY_BASE_URL: https://stage.app.algosec.com/prevasio/api/ci/docker-scan
           MIN_LEVEL_TO_BLOCK_PR: 0
+          CF_REGION: stage
